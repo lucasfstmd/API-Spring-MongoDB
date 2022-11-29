@@ -29,21 +29,13 @@ public class UserController {
         return ResponseEntity.ok(userService.getAll());
     }
 
-    @PutMapping("update/{id}")
-    public ResponseEntity update(@PathVariable("Id") String Id, @RequestBody UserModelRequest userModelRequest){
-        return userRepository.findById(Id).map(record -> {
-            record.setName(userModelRequest.getNome());
-            record.setSenha(userModelRequest.getSenha());
-            UserModelResponse userModelRequestUpdate = userService.create(userModelRequest);
-            return ResponseEntity.ok().body(userModelRequestUpdate);
-        }).orElse(ResponseEntity.notFound().build());
+    @PutMapping
+    public UserModelResponse update(@RequestBody UserModelResponse userModelResponse){
+        return userService.update(userModelResponse);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delet(@PathVariable("id") String Id){
-        return userRepository.findById(Id).map(record -> {
-            userRepository.deleteById(Id);
-            return ResponseEntity.ok().build();
-        }).orElse(ResponseEntity.notFound().build());
+    public String delet(@PathVariable("id") String Id){
+        return userService.delet(Id);
     }
 }

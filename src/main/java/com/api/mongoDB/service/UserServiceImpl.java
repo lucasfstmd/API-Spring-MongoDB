@@ -45,27 +45,23 @@ public class UserServiceImpl implements UserService {
         if(!user.isEmpty()){
             user.forEach(userEntity -> responses.add(createResponse(userEntity)));
         }
-
         return responses;
     }
 
     @Override
-    public UserModelResponse update(String Id, UserModelRequest userModelRequest) {
-        UserEntity userEntity = repository.findById(Id).get();
-        if(!repository.findById(Id).isEmpty()){
-            userEntity.setName(userModelRequest.getNome());
-            userEntity.setSenha(userModelRequest.getSenha());
+    public UserModelResponse update(UserModelResponse userModelResponse) {
+        UserEntity userEntity = repository.findById(userModelResponse.getId()).get();
+        userEntity.setName(userModelResponse.getName());
+        userEntity.setSenha(userModelResponse.getSenha());
+        repository.save(userEntity);
 
-            repository.save(userEntity);
-            return createResponse(userEntity);
-        }else{
-            return createResponse(null);
-        }
+        return createResponse(userEntity);
     }
 
     @Override
-    public void delet(String Id) {
+    public String delet(String Id) {
         repository.deleteById(Id);
+        return Id + " foi deletado";
     }
 
 

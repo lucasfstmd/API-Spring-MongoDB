@@ -11,7 +11,7 @@ public interface UserService {
 
     List<UserModelResponse> getAll();
 
-    UserModelResponse update(String id, UserModelRequest userModelRequest);
+    UserModelResponse update(UserModelResponse userModelResponse);
 
-    void delet(String Id);
+    String delet(String Id);
 }
