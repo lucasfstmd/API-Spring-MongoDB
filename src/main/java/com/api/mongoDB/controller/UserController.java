@@ -19,12 +19,12 @@ public class UserController {
     public UserService userService;
     public UserRepository userRepository;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<UserModelResponse> creat(@RequestBody UserModelRequest userModelRequest){
         return ResponseEntity.ok(userService.create(userModelRequest));
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<UserModelResponse>> getAll(){
         return ResponseEntity.ok(userService.getAll());
     }

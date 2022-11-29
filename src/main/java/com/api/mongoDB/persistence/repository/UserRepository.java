@@ -7,5 +7,4 @@ import com.api.mongoDB.persistence.entity.UserEntity;
 
 @Repository
 public interface UserRepository extends MongoRepository<UserEntity, String>{
-    
 }
