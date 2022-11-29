@@ -2,6 +2,7 @@ package com.api.mongoDB.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,25 @@ public class UserServiceImpl implements UserService {
 
         return responses;
     }
-    
+
+    @Override
+    public UserModelResponse update(String Id, UserModelRequest userModelRequest) {
+        UserEntity userEntity = repository.findById(Id).get();
+        if(!repository.findById(Id).isEmpty()){
+            userEntity.setName(userModelRequest.getNome());
+            userEntity.setSenha(userModelRequest.getSenha());
+
+            repository.save(userEntity);
+            return createResponse(userEntity);
+        }else{
+            return createResponse(null);
+        }
+    }
+
+    @Override
+    public void delet(String Id) {
+        repository.deleteById(Id);
+    }
+
+
 }

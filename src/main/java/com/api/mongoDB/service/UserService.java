@@ -10,4 +10,8 @@ public interface UserService {
     UserModelResponse create(UserModelRequest userModelRequest);
 
     List<UserModelResponse> getAll();
+
+    UserModelResponse update(String id, UserModelRequest userModelRequest);
+
+    void delet(String Id);
 }
